@@ -1,5 +1,7 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
+import { colors } from "../theme/colors";
 
+// Welcome screen with entry CTA
 const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -7,7 +9,13 @@ const WelcomeScreen = ({ navigation }) => {
       <Text style={styles.subtitle}>
         Discover Pokémon and choose your favorites
       </Text>
-      <Button title="Start" onPress={() => navigation.navigate("Swipe")} />
+
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Swipe")}
+      >
+        <Text style={styles.buttonText}>START</Text>
+      </Pressable>
     </View>
   );
 };
@@ -19,16 +27,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
+    backgroundColor: colors.white,
   },
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 12,
+    color: colors.primary,
+    marginBottom: 10,
   },
   subtitle: {
-    fontSize: 16,
+    color: colors.gray,
     marginBottom: 20,
-    textAlign: "center",
+  },
+  button: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: colors.white,
+    fontWeight: "bold",
   },
 });

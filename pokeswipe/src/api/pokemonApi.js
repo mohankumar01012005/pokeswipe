@@ -2,29 +2,18 @@ import axios from "axios";
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
-/**
- * Fetch a random Pokémon and normalize data
- */
+// Fetches one random Pokémon and normalizes data for UI usage
 export const fetchRandomPokemon = async () => {
   const randomId = Math.floor(Math.random() * 150) + 1;
 
-  console.log("📡 Fetching Pokémon with ID:", randomId);
-
   const response = await axios.get(`${BASE_URL}/${randomId}`);
+  const data = response.data;
 
-  console.log("✅ Raw API Response:", response.data);
-
-  const normalizedPokemon = {
-    id: response.data.id,
-    name: response.data.name.toUpperCase(),
-    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${response.data.id}.svg`,
-    abilities: response.data.abilities.map(
-      (item) => item.ability.name
-    ),
-    types: response.data.types.map((item) => item.type.name),
+  return {
+    id: data.id,
+    name: data.name.toUpperCase(),
+    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`,
+    abilities: data.abilities.map((a) => a.ability.name),
+    types: data.types.map((t) => t.type.name),
   };
-
-  console.log("🔄 Normalized Pokémon:", normalizedPokemon);
-
-  return normalizedPokemon;
 };
