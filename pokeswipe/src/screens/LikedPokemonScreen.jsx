@@ -1,19 +1,12 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 
+// Placeholder – list will be added in next milestone
 const LikedPokemonScreen = () => {
   return (
-    <View style={styles.container}>
+    <View>
       <Text>Liked Pokémon will appear here</Text>
     </View>
   );
 };
 
 export default LikedPokemonScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
