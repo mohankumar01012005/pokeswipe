@@ -1,7 +1,8 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { colors } from "../theme/colors";
+import { typeColors, abilityColor } from "../utils/pokemonColors";
 
-// Displays Pokémon details in a card format
+// Displays Pokémon details in a styled card
 const PokemonCard = ({ pokemon }) => {
   return (
     <View style={styles.card}>
@@ -9,19 +10,32 @@ const PokemonCard = ({ pokemon }) => {
 
       <Text style={styles.name}>{pokemon.name}</Text>
 
+      {/* Pokémon Types */}
       <View style={styles.row}>
         {pokemon.types.map((type) => (
-          <Text key={type} style={styles.tag}>
-            {type}
-          </Text>
+          <View
+            key={type}
+            style={[
+              styles.chip,
+              { backgroundColor: typeColors[type] || colors.gray },
+            ]}
+          >
+            <Text style={styles.chipText}>{type.toUpperCase()}</Text>
+          </View>
         ))}
       </View>
 
+      {/* Pokémon Abilities */}
       <View style={styles.row}>
         {pokemon.abilities.map((ability) => (
-          <Text key={ability} style={styles.subTag}>
-            {ability}
-          </Text>
+          <View
+            key={ability}
+            style={[styles.chip, { backgroundColor: abilityColor }]}
+          >
+            <Text style={styles.chipText}>
+              {ability.replace("-", " ").toUpperCase()}
+            </Text>
+          </View>
         ))}
       </View>
     </View>
@@ -33,7 +47,7 @@ export default PokemonCard;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.white,
-    borderRadius: 16,
+    borderRadius: 18,
     padding: 20,
     width: 320,
     alignItems: "center",
@@ -41,15 +55,15 @@ const styles = StyleSheet.create({
     borderColor: colors.cardBorder,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 160,
+    height: 160,
     marginBottom: 12,
   },
   name: {
     fontSize: 22,
     fontWeight: "bold",
     color: colors.textDark,
-    marginBottom: 10,
+    marginBottom: 12,
   },
   row: {
     flexDirection: "row",
@@ -57,19 +71,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 8,
   },
-  tag: {
-    backgroundColor: colors.lightBlue,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
+  chip: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 14,
     margin: 4,
   },
-  subTag: {
-    backgroundColor: "#F1F5F9",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 10,
-    margin: 4,
+  chipText: {
+    color: colors.white,
     fontSize: 12,
+    fontWeight: "bold",
   },
 });
