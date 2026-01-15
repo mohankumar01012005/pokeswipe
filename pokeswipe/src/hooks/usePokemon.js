@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchRandomPokemon } from "../api/pokemonApi";
 
-// Encapsulates Pokémon fetching logic
+// Handles Pokémon API fetching
 export const usePokemon = () => {
   return useQuery({
     queryKey: ["randomPokemon"],

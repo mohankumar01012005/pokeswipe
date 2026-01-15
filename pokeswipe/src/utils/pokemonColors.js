@@ -1,4 +1,4 @@
-// Official-style Pokémon type colors
+// Pokémon type color mapping
 export const typeColors = {
   fire: "#F97316",
   water: "#3B82F6",
@@ -18,5 +18,4 @@ export const typeColors = {
   dragon: "#7C3AED",
 };
 
-// Ability chips use neutral accent color
 export const abilityColor = "#0EA5E9";

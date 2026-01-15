@@ -1,8 +1,7 @@
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import { colors } from "../theme/colors";
+import { View, Text, Pressable, StyleSheet } from "react-native"
+import { commonColors } from "../theme/colors"
 
-// Like / Dislike buttons
-const ActionButtons = ({ onLike, onDislike }) => {
+const ActionButtons = ({ onLike, onDislike, theme }) => {
   return (
     <View style={styles.container}>
       <Pressable style={[styles.button, styles.dislike]} onPress={onDislike}>
@@ -13,15 +12,16 @@ const ActionButtons = ({ onLike, onDislike }) => {
         <Text style={styles.text}>Like</Text>
       </Pressable>
     </View>
-  );
-};
+  )
+}
 
-export default ActionButtons;
+export default ActionButtons
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     marginTop: 16,
+    marginBottom: 20,
   },
   button: {
     paddingVertical: 12,
@@ -30,13 +30,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   like: {
-    backgroundColor: colors.like,
+    backgroundColor: commonColors.like,
   },
   dislike: {
-    backgroundColor: colors.dislike,
+    backgroundColor: commonColors.dislike,
   },
   text: {
-    color: colors.white,
+    color: "#FFFFFF",
     fontWeight: "bold",
+    fontSize: 14,
   },
-});
+})
