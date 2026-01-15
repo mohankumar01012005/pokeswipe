@@ -1,27 +1,16 @@
 "use client"
 
-// ============================================================================
-// WELCOME SCREEN - First Impression Component
-// ============================================================================
-// Displays an engaging introduction to PokéSwipe with:
-// - Animated Pokemon logo
-// - Instructions for gameplay
-// - CTA button to start the experience
-// - Full theme support (light/dark mode)
-// ============================================================================
-
 import React, { useEffect } from "react"
-import { View, Text, Pressable, StyleSheet, Animated, useWindowDimensions } from "react-native"
+import { View, Text, Pressable, StyleSheet, Animated } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useContext } from "react"
 import { PokemonContext } from "../context/PokemonContext"
 import { lightTheme, darkTheme, commonColors } from "../theme/colors"
 
 const WelcomeScreen = ({ navigation }) => {
-  const { state } = useContext(PokemonContext)
+  const { state, dispatch } = useContext(PokemonContext)
   const theme = state.theme === "light" ? lightTheme : darkTheme
   const insets = useSafeAreaInsets()
-  const { width, height } = useWindowDimensions()
 
   const logoScale = React.useRef(new Animated.Value(0.5)).current
   const logoOpacity = React.useRef(new Animated.Value(0)).current
@@ -31,7 +20,6 @@ const WelcomeScreen = ({ navigation }) => {
   const buttonOpacity = React.useRef(new Animated.Value(0)).current
 
   useEffect(() => {
-    // Logo entrance animation
     Animated.sequence([
       Animated.parallel([
         Animated.timing(logoScale, {
@@ -45,7 +33,6 @@ const WelcomeScreen = ({ navigation }) => {
           useNativeDriver: true,
         }),
       ]),
-      // Text entrance animation
       Animated.parallel([
         Animated.timing(textSlide, {
           toValue: 0,
@@ -58,7 +45,6 @@ const WelcomeScreen = ({ navigation }) => {
           useNativeDriver: true,
         }),
       ]),
-      // Button entrance animation
       Animated.parallel([
         Animated.timing(buttonScale, {
           toValue: 1,
@@ -91,9 +77,12 @@ const WelcomeScreen = ({ navigation }) => {
     })
   }
 
+  const handleThemeToggle = () => {
+    dispatch({ type: "TOGGLE_THEME" })
+  }
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      {/* Background decorative elements */}
       <View
         style={[
           styles.bgBlob,
@@ -103,9 +92,15 @@ const WelcomeScreen = ({ navigation }) => {
         ]}
       />
 
-      {/* Main content container */}
+      <Pressable
+        onPress={handleThemeToggle}
+        hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
+        style={[styles.themeToggle, { top: insets.top + 16 }]}
+      >
+        <Text style={styles.themeToggleText}>{state.theme === "light" ? "🌙" : "☀️"}</Text>
+      </Pressable>
+
       <View style={[styles.contentContainer, { paddingTop: insets.top + 20 }]}>
-        {/* Pokemon Logo with animation */}
         <Animated.View
           style={[
             styles.logoContainer,
@@ -118,12 +113,10 @@ const WelcomeScreen = ({ navigation }) => {
           <Text style={styles.pokemonLogo}>pokéAPI</Text>
         </Animated.View>
 
-        {/* Heart accent icon */}
         <View style={styles.heartAccent}>
           <Text style={styles.heartIcon}>♡</Text>
         </View>
 
-        {/* Welcome content with animation */}
         <Animated.View
           style={[
             styles.welcomeContent,
@@ -133,10 +126,8 @@ const WelcomeScreen = ({ navigation }) => {
             },
           ]}
         >
-          {/* Main title */}
           <Text style={[styles.title, { color: theme.text }]}>How to Play PokéSwipe</Text>
 
-          {/* Instructions */}
           <View style={styles.instructionsContainer}>
             <View style={styles.instructionItem}>
               <Text style={[styles.bulletPoint, { color: commonColors.primary }]}>•</Text>
@@ -155,7 +146,6 @@ const WelcomeScreen = ({ navigation }) => {
           </View>
         </Animated.View>
 
-        {/* CTA Button with animation */}
         <Animated.View
           style={[
             styles.buttonWrapper,
@@ -191,7 +181,6 @@ const WelcomeScreen = ({ navigation }) => {
 export default WelcomeScreen
 
 const styles = StyleSheet.create({
-  // Main container with full flex layout
   container: {
     flex: 1,
     justifyContent: "center",
@@ -199,7 +188,6 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 
-  // Background decorative blob
   bgBlob: {
     position: "absolute",
     width: 300,
@@ -209,7 +197,21 @@ const styles = StyleSheet.create({
     right: -100,
   },
 
-  // Content wrapper with padding
+  themeToggle: {
+    position: "absolute",
+    right: 16,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 10,
+  },
+
+  themeToggleText: {
+    fontSize: 20,
+  },
+
   contentContainer: {
     width: "100%",
     paddingHorizontal: 24,
@@ -219,7 +221,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  // Pokemon logo styling
   logoContainer: {
     marginBottom: 32,
   },
@@ -232,7 +233,6 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 
-  // Heart accent positioned at top-right
   heartAccent: {
     position: "absolute",
     top: 80,
@@ -255,13 +255,11 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
 
-  // Welcome content container
   welcomeContent: {
     alignItems: "center",
     marginBottom: 48,
   },
 
-  // Main title with handwritten feel
   title: {
     fontSize: 32,
     fontWeight: "700",
@@ -270,13 +268,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
 
-  // Instructions list container
   instructionsContainer: {
     width: "100%",
     gap: 16,
   },
 
-  // Individual instruction item
   instructionItem: {
     flexDirection: "row",
     alignItems: "flex-start",
@@ -284,14 +280,12 @@ const styles = StyleSheet.create({
     gap: 12,
   },
 
-  // Bullet point styling
   bulletPoint: {
     fontSize: 24,
     fontWeight: "bold",
     marginTop: -2,
   },
 
-  // Instruction text styling
   instructionText: {
     fontSize: 16,
     lineHeight: 24,
@@ -299,13 +293,11 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  // Button wrapper for animation
   buttonWrapper: {
     width: "100%",
     paddingHorizontal: 20,
   },
 
-  // CTA button styling
   button: {
     paddingVertical: 16,
     paddingHorizontal: 32,
@@ -316,7 +308,6 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255,255,255,0.3)",
   },
 
-  // Button text styling
   buttonText: {
     color: "#FFFFFF",
     fontSize: 18,
