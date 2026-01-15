@@ -37,6 +37,32 @@ A professional React Native Pokemon discovery app built with Expo featuring:
 
 
 
+## Techstack 
+
+React Native
+
+Expo
+
+React
+
+
+React Navigation 
+
+TanStack React Query
+
+Axios
+
+
+Expo Haptics
+
+
+Expo Vector Icons
+
+Context API
+
+ESLint
+
+Expo CLI
 
 
 
