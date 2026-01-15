@@ -12,6 +12,34 @@ A professional React Native Pokemon discovery app built with Expo featuring:
 
 ---
 
+## Preview
+<img width="364" height="792" alt="image" src="https://github.com/user-attachments/assets/86c72509-8679-494d-a00d-821b230c6d48" />
+
+
+
+<img width="376" height="798" alt="image" src="https://github.com/user-attachments/assets/a36ea5d8-e14f-4b2d-8741-0e2ea13c4ff5" />
+
+
+
+<img width="375" height="797" alt="image" src="https://github.com/user-attachments/assets/2636b8b4-9e20-45b1-8559-e7ff39c5fcdd" />
+
+
+
+<img width="369" height="800" alt="image" src="https://github.com/user-attachments/assets/0fd5d55e-6c89-4a07-933a-683e58bddff5" />
+
+
+
+<img width="373" height="802" alt="image" src="https://github.com/user-attachments/assets/b8e40891-cb9d-4f35-9664-3e42458d7c10" />
+
+
+<img width="372" height="803" alt="image" src="https://github.com/user-attachments/assets/3c7fbefb-ad03-4ad8-bf79-bd4926ea33d5" />
+
+
+
+
+
+
+
 ## Features Implemented
 
 ### 1. Welcome Screen
